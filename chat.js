@@ -35,7 +35,7 @@ const getData = async (req) => {
   } catch (e) {
     console.log(e);
   }
-  return res.json();
+  return res;
 };
 
 app.get("/", function (req, res) {
