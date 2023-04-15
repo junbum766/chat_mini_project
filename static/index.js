@@ -180,31 +180,27 @@ socket.on("gameStart", (data) => {
   }
 });
 // 게임 중, 단어 검사
-socket
-  .on("wordCheck", (data) => {
-    // words.pastWord : 이전 단어, words.recentWord : 현재 단어
-    console.log("sendWords 몇번 통과?", data);
+socket.on("wordCheck", (data) => {
+  // words.pastWord : 이전 단어, words.recentWord : 현재 단어
+  console.log("sendWords 몇번 통과?", data);
 
-    console.log(
-      "단어 체크...",
-      data.pastWord.slice(-1),
-      data.recentWord.slice(0, 1)
-    );
-    if (data.channel == undefined) {
-      // 패배 시나리오 1) 표준어 x
-      alert(`${data.recentWord} 은 표준어가 아닙니다!`);
-      socket.emit("lose", myNick);
-    } else if (data.pastWord.slice(-1) != data.recentWord.slice(0, 1)) {
-      // 패배 시나리오 2) 첫자가 앞에 마지막자와 다르면 패배
-      socket.emit("lose", myNick);
-    } else {
-      // 성공 시나리오) list에 단어를 저장 후 단어를 넘겨줌
-      socket.emit("nextWord", { input: data.recentWord, myNick: myNick });
-    }
-  })
-  .catch((err) => {
-    console.log("api 요청 오류", err);
-  });
+  console.log(
+    "단어 체크...",
+    data.pastWord.slice(-1),
+    data.recentWord.slice(0, 1)
+  );
+  if (data.channel == undefined) {
+    // 패배 시나리오 1) 표준어 x
+    alert(`${data.recentWord} 은 표준어가 아닙니다!`);
+    socket.emit("lose", myNick);
+  } else if (data.pastWord.slice(-1) != data.recentWord.slice(0, 1)) {
+    // 패배 시나리오 2) 첫자가 앞에 마지막자와 다르면 패배
+    socket.emit("lose", myNick);
+  } else {
+    // 성공 시나리오) list에 단어를 저장 후 단어를 넘겨줌
+    socket.emit("nextWord", { input: data.recentWord, myNick: myNick });
+  }
+});
 
 // 다음 단어가 뭘로 시작해야 하는지 공지
 socket.on("nextWordAlert", (data) => {
