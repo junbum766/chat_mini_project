@@ -173,5 +173,5 @@ io.on("connection", (socket) => {
 });
 
 http.listen(PORT, () => {
-  console.log(`http://http://13.124.112.210:${PORT}`);
+  console.log(`http://13.124.112.210:${PORT}`);
 });
