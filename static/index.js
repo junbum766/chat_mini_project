@@ -196,6 +196,9 @@ socket.on("wordCheck", (data) => {
   } else if (data.pastWord.slice(-1) != data.recentWord.slice(0, 1)) {
     // 패배 시나리오 2) 첫자가 앞에 마지막자와 다르면 패배
     socket.emit("lose", myNick);
+  } else if (data.wordList.indexOf(data.recentWord) != data.wordList.length-1) {
+    // 패배 시나리오 3) 리스트 안에 단어가 이미 존재
+    socket.emit("lose", myNick);
   } else {
     // 성공 시나리오) list에 단어를 저장 후 단어를 넘겨줌
     socket.emit("nextWord", { input: data.recentWord, myNick: myNick });
