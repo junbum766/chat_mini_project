@@ -143,7 +143,7 @@ io.on("connection", (socket) => {
       socket.emit("wordCheck", {
         pastWord: words[words.length - 2],
         recentWord: words[words.length - 1],
-        wordDefinition: res,
+        wordDefinition: res.channel,
       }); // words[-1]와 words[-2] 비교
     });
   });

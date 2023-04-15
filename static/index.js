@@ -189,7 +189,7 @@ socket.on("wordCheck", (data) => {
     data.pastWord.slice(-1),
     data.recentWord.slice(0, 1)
   );
-  if (data.channel == undefined) {
+  if (data.wordDefinition == undefined) {
     // 패배 시나리오 1) 표준어 x
     alert(`${data.recentWord} 은 표준어가 아닙니다!`);
     socket.emit("lose", myNick);
